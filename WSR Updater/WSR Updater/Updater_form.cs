@@ -13,15 +13,16 @@ namespace WSR_Updater
 {
     public partial class Updater_form : Form
     {
-        private string path = "";
+        private string source = "", destination = "";
         private int linesOfSQL;
+        private int startline, entries, updated, added;
 
         public Updater_form()
         {
             InitializeComponent();
         }
 
-        private void Browse_button_Click(object sender, EventArgs e)
+        private void Browse_source_button_Click(object sender, EventArgs e)
         {
             OpenFileDialog openDialog = new OpenFileDialog();
             openDialog.Filter = "WSR files (*.wsr)|*.wsr";
@@ -29,21 +30,34 @@ namespace WSR_Updater
 
             if (openDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                path = openDialog.FileName;
-                browse_textBox.Text = path;
+                source = openDialog.FileName;
+                browse_source_textBox.Text = source;
             }
+        }
+
+        private void Browse_destination_button_Click(object sender, EventArgs e)
+        {
+            FolderBrowserDialog folderDialog = new FolderBrowserDialog();
+            
+            if(folderDialog.ShowDialog() == DialogResult.OK)
+            {
+                destination = folderDialog.SelectedPath;
+                browse_destination_textBox.Text = destination;
+            }
+                
         }
 
         private void Update_button_Click(object sender, EventArgs e)
         {
-            if (((line_textBox.Text == "" || entries_textBox.Text == ""
-                || browse_textBox.Text == "" ) && add_RadioButton.Checked) 
-                || (browse_textBox.Text == "" && gaps_RadioButton.Checked))
+            if (((line_textBox.Text == "" || entries_textBox.Text == "" || browse_source_textBox.Text == "" 
+                || browse_destination_textBox.Text == "" ) && add_RadioButton.Checked) 
+                || ((browse_source_textBox.Text == "" || browse_destination_textBox.Text == "") 
+                && gaps_RadioButton.Checked))
             {
                 message_textBox.Text += "Error: All fields are required.\r\n";
             }
 
-            else if (!path.Contains(".wsr"))
+            else if (!source.Contains(".wsr"))
                 message_textBox.Text += "Error: Only WSR file types are supported.";
 
             else
@@ -52,21 +66,22 @@ namespace WSR_Updater
                 {
                     if (add_RadioButton.Checked)
                     {
-                        int changeline = int.Parse(line_textBox.Text);
-                        int addline = int.Parse(entries_textBox.Text);
+                        startline = int.Parse(line_textBox.Text);
+                        entries = int.Parse(entries_textBox.Text);
 
                         GetTotalLines();
-                        AlterLines(changeline, addline);
                     }
                     else
                     {
                         GetTotalLines();
+                        UpdateAllLines();
 
                     }
 
-                    //message_textBox.Text = "Success! WSR successfully updated here:\r\n\r\n" + path;
+                    message_textBox.Text = "Success! WSR successfully updated here:\r\n\r\n" + destination;
                     line_textBox.Text = ""; entries_textBox.Text = "";
-                    browse_textBox.Text = "";
+                    browse_source_textBox.Text = ""; browse_destination_textBox.Text = "";
+                    source = ""; destination = "";
                 }
                 catch (Exception)
                 {
@@ -75,35 +90,45 @@ namespace WSR_Updater
             }
         }
 
-        public void AlterLines(int c, int a)
+        public void UpdateAllLines()
         {
-            string text = File.ReadAllText(path);
-            string empty = "", pre, post;
+            string text = File.ReadAllText(source);
+            StreamReader sr = new StreamReader(source);
+            string oldline = sr.ReadLine(), newline = "";
+            int i = 0;
 
-            for (int i = c; i < c + a; i++)
+            while (oldline != "[PreProcessSQL]" && !sr.EndOfStream)
+                oldline = sr.ReadLine();
+
+            oldline = sr.ReadLine();
+            while (!sr.EndOfStream)
             {
-                empty += String.Format(i + "=\r\n");
+                if ((oldline.IndexOf("=INSERT INTO", 0, StringComparison.CurrentCultureIgnoreCase) > -1
+                    || oldline.IndexOf("=CREATE", 0, StringComparison.CurrentCultureIgnoreCase) > -1
+                    || oldline.IndexOf("=ALTER ", 0, StringComparison.CurrentCultureIgnoreCase) > -1
+                    || oldline.IndexOf("=UPDATE ", 0, StringComparison.CurrentCultureIgnoreCase) > -1
+                    || oldline.IndexOf("=DELETE ", 0, StringComparison.CurrentCultureIgnoreCase) > -1
+                    || oldline.IndexOf("=SELECT ", 0, StringComparison.CurrentCultureIgnoreCase) > -1)
+                    && oldline.IndexOf(";--", 0, StringComparison.CurrentCultureIgnoreCase) <= -1)
+                {
+                    i++;
+                    string[] splitline = oldline.Split('=');
+                    string oldnum = String.Format(splitline[0] + "=");
+                    newline = oldline.Replace(oldnum, String.Format(i + "="));
+                    text = text.Replace(oldline, newline);
+                }
+
+                oldline = sr.ReadLine();
             }
 
-            for (int i = linesOfSQL; i >= c; i--)
-            {
-                pre = String.Format(i + "=");
-                if (i != c)
-                    post = String.Format((i + a) + "=");
-                else
-                    post = String.Format(empty + (i + a) + "=");
-
-
-                text = text.Replace(pre, post);
-            }
-
-            File.WriteAllText(@path, text);
+            //MessageBox.Show(text);
+            File.WriteAllText(destination + "\\" + $@"{Guid.NewGuid()}.wsr", text);
 
         }
 
         private void GetTotalLines()
         {
-            StreamReader sr = new StreamReader(path);
+            StreamReader sr = new StreamReader(source);
             string line = sr.ReadLine();
             linesOfSQL = 0;
 
@@ -112,20 +137,18 @@ namespace WSR_Updater
 
             while (!sr.EndOfStream)
             {
-                if (line.IndexOf(";--", 0, StringComparison.CurrentCultureIgnoreCase) > -1)
-                     //this is a commented line, do not count as SQL
-                
-                else if (line.IndexOf("=INSERT INTO", 0, StringComparison.CurrentCultureIgnoreCase) > -1
+                if ((line.IndexOf("=INSERT INTO", 0, StringComparison.CurrentCultureIgnoreCase) > -1
                     || line.IndexOf("=CREATE", 0, StringComparison.CurrentCultureIgnoreCase) > -1
                     || line.IndexOf("=ALTER ", 0, StringComparison.CurrentCultureIgnoreCase) > -1
                     || line.IndexOf("=UPDATE ", 0, StringComparison.CurrentCultureIgnoreCase) > -1
                     || line.IndexOf("=DELETE ", 0, StringComparison.CurrentCultureIgnoreCase) > -1
                     || line.IndexOf("=SELECT ", 0, StringComparison.CurrentCultureIgnoreCase) > -1)
+                    && line.IndexOf(";--", 0, StringComparison.CurrentCultureIgnoreCase) <= -1)
                     linesOfSQL++;
 
                 line = sr.ReadLine();
             }
-            message_textBox.Text = "There are " + linesOfSQL + " lines of SQL\r\n";
+            //message_textBox.Text = "There are " + linesOfSQL + " lines of SQL\r\n";
 
         }
 
