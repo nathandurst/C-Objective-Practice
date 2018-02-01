@@ -55,15 +55,16 @@ namespace WSR_Updater
                         int totalline = int.Parse(total_textBox.Text);
 
                         AlterLines(changeline, totalline, addline);
-
-                        message_textBox.Text = "Success! WSR successfully updated here:\r\n\r\n" + path;
-                        line_textBox.Text = ""; entries_textBox.Text = "";
-                        browse_textBox.Text = ""; total_textBox.Text = "";
                     }
                     else
                     {
+                        FillGaps();
 
                     }
+
+                    message_textBox.Text = "Success! WSR successfully updated here:\r\n\r\n" + path;
+                    line_textBox.Text = ""; entries_textBox.Text = "";
+                    browse_textBox.Text = ""; total_textBox.Text = "";
                 }
                 catch (Exception)
                 {
@@ -95,6 +96,11 @@ namespace WSR_Updater
             }
 
             File.WriteAllText(@path, text);
+
+        }
+
+        private void FillGaps()
+        {
 
         }
 
