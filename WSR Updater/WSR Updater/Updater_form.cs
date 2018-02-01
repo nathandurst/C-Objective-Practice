@@ -14,6 +14,7 @@ namespace WSR_Updater
     public partial class Updater_form : Form
     {
         private string path = "";
+        private int linesOfSQL;
 
         public Updater_form()
         {
@@ -35,8 +36,9 @@ namespace WSR_Updater
 
         private void Update_button_Click(object sender, EventArgs e)
         {
-            if (line_textBox.Text == "" || entries_textBox.Text == ""
-                || browse_textBox.Text == "" || total_textBox.Text == "")
+            if (((line_textBox.Text == "" || entries_textBox.Text == ""
+                || browse_textBox.Text == "" ) && add_RadioButton.Checked) 
+                || (browse_textBox.Text == "" && gaps_RadioButton.Checked))
             {
                 message_textBox.Text += "Error: All fields are required.\r\n";
             }
@@ -52,19 +54,19 @@ namespace WSR_Updater
                     {
                         int changeline = int.Parse(line_textBox.Text);
                         int addline = int.Parse(entries_textBox.Text);
-                        int totalline = int.Parse(total_textBox.Text);
 
-                        AlterLines(changeline, totalline, addline);
+                        GetTotalLines();
+                        AlterLines(changeline, addline);
                     }
                     else
                     {
-                        FillGaps();
+                        GetTotalLines();
 
                     }
 
-                    message_textBox.Text = "Success! WSR successfully updated here:\r\n\r\n" + path;
+                    //message_textBox.Text = "Success! WSR successfully updated here:\r\n\r\n" + path;
                     line_textBox.Text = ""; entries_textBox.Text = "";
-                    browse_textBox.Text = ""; total_textBox.Text = "";
+                    browse_textBox.Text = "";
                 }
                 catch (Exception)
                 {
@@ -73,7 +75,7 @@ namespace WSR_Updater
             }
         }
 
-        public void AlterLines(int c, int t, int a)
+        public void AlterLines(int c, int a)
         {
             string text = File.ReadAllText(path);
             string empty = "", pre, post;
@@ -83,7 +85,7 @@ namespace WSR_Updater
                 empty += String.Format(i + "=\r\n");
             }
 
-            for (int i = t; i >= c; i--)
+            for (int i = linesOfSQL; i >= c; i--)
             {
                 pre = String.Format(i + "=");
                 if (i != c)
@@ -99,8 +101,31 @@ namespace WSR_Updater
 
         }
 
-        private void FillGaps()
+        private void GetTotalLines()
         {
+            StreamReader sr = new StreamReader(path);
+            string line = sr.ReadLine();
+            linesOfSQL = 0;
+
+            while (line != "[PreProcessSQL]" && !sr.EndOfStream)
+                line = sr.ReadLine();
+
+            while (!sr.EndOfStream)
+            {
+                if (line.IndexOf(";--", 0, StringComparison.CurrentCultureIgnoreCase) > -1)
+                     //this is a commented line, do not count as SQL
+                
+                else if (line.IndexOf("=INSERT INTO", 0, StringComparison.CurrentCultureIgnoreCase) > -1
+                    || line.IndexOf("=CREATE", 0, StringComparison.CurrentCultureIgnoreCase) > -1
+                    || line.IndexOf("=ALTER ", 0, StringComparison.CurrentCultureIgnoreCase) > -1
+                    || line.IndexOf("=UPDATE ", 0, StringComparison.CurrentCultureIgnoreCase) > -1
+                    || line.IndexOf("=DELETE ", 0, StringComparison.CurrentCultureIgnoreCase) > -1
+                    || line.IndexOf("=SELECT ", 0, StringComparison.CurrentCultureIgnoreCase) > -1)
+                    linesOfSQL++;
+
+                line = sr.ReadLine();
+            }
+            message_textBox.Text = "There are " + linesOfSQL + " lines of SQL\r\n";
 
         }
 

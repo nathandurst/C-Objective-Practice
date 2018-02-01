@@ -8,3 +8,13 @@ C:\Users\nathan.durst\Documents\WSR Updater\WSR Updater\obj\Debug\WSR Updater.cs
 C:\Users\nathan.durst\Documents\WSR Updater\WSR Updater\obj\Debug\WSR Updater.csproj.CoreCompileInputs.cache
 C:\Users\nathan.durst\Documents\WSR Updater\WSR Updater\obj\Debug\WSR Updater.exe
 C:\Users\nathan.durst\Documents\WSR Updater\WSR Updater\obj\Debug\WSR Updater.pdb
+C:\Users\nathan.durst\Documents\IHS-C-Sharp-Objective-Practice\WSR Updater\WSR Updater\bin\Debug\WSR Updater.exe.config
+C:\Users\nathan.durst\Documents\IHS-C-Sharp-Objective-Practice\WSR Updater\WSR Updater\bin\Debug\WSR Updater.exe
+C:\Users\nathan.durst\Documents\IHS-C-Sharp-Objective-Practice\WSR Updater\WSR Updater\bin\Debug\WSR Updater.pdb
+C:\Users\nathan.durst\Documents\IHS-C-Sharp-Objective-Practice\WSR Updater\WSR Updater\obj\Debug\WSR Updater.csprojResolveAssemblyReference.cache
+C:\Users\nathan.durst\Documents\IHS-C-Sharp-Objective-Practice\WSR Updater\WSR Updater\obj\Debug\WSR_Updater.Updater_form.resources
+C:\Users\nathan.durst\Documents\IHS-C-Sharp-Objective-Practice\WSR Updater\WSR Updater\obj\Debug\WSR_Updater.Properties.Resources.resources
+C:\Users\nathan.durst\Documents\IHS-C-Sharp-Objective-Practice\WSR Updater\WSR Updater\obj\Debug\WSR Updater.csproj.GenerateResource.Cache
+C:\Users\nathan.durst\Documents\IHS-C-Sharp-Objective-Practice\WSR Updater\WSR Updater\obj\Debug\WSR Updater.csproj.CoreCompileInputs.cache
+C:\Users\nathan.durst\Documents\IHS-C-Sharp-Objective-Practice\WSR Updater\WSR Updater\obj\Debug\WSR Updater.exe
+C:\Users\nathan.durst\Documents\IHS-C-Sharp-Objective-Practice\WSR Updater\WSR Updater\obj\Debug\WSR Updater.pdb

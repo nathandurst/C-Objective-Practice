@@ -36,10 +36,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.Update_button = new System.Windows.Forms.Button();
             this.message_textBox = new System.Windows.Forms.TextBox();
-            this.total_textBox = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.add_RadioButton = new System.Windows.Forms.RadioButton();
             this.gaps_RadioButton = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // browse_textBox
@@ -93,7 +92,7 @@
             // 
             // Update_button
             // 
-            this.Update_button.Location = new System.Drawing.Point(290, 95);
+            this.Update_button.Location = new System.Drawing.Point(297, 104);
             this.Update_button.Name = "Update_button";
             this.Update_button.Size = new System.Drawing.Size(97, 27);
             this.Update_button.TabIndex = 6;
@@ -103,27 +102,11 @@
             // 
             // message_textBox
             // 
-            this.message_textBox.Location = new System.Drawing.Point(12, 128);
+            this.message_textBox.Location = new System.Drawing.Point(12, 137);
             this.message_textBox.Multiline = true;
             this.message_textBox.Name = "message_textBox";
             this.message_textBox.Size = new System.Drawing.Size(385, 203);
             this.message_textBox.TabIndex = 7;
-            // 
-            // total_textBox
-            // 
-            this.total_textBox.Location = new System.Drawing.Point(190, 102);
-            this.total_textBox.Name = "total_textBox";
-            this.total_textBox.Size = new System.Drawing.Size(61, 20);
-            this.total_textBox.TabIndex = 8;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 105);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(143, 13);
-            this.label3.TabIndex = 9;
-            this.label3.Text = "Number of lines (pre update):";
             // 
             // add_RadioButton
             // 
@@ -149,15 +132,23 @@
             this.gaps_RadioButton.UseVisualStyleBackColor = true;
             this.gaps_RadioButton.CheckedChanged += new System.EventHandler(this.gaps_RadioButton_CheckedChanged);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 121);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(83, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "Message Panel:";
+            // 
             // Updater_form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(409, 343);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.gaps_RadioButton);
             this.Controls.Add(this.add_RadioButton);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.total_textBox);
             this.Controls.Add(this.message_textBox);
             this.Controls.Add(this.Update_button);
             this.Controls.Add(this.label2);
@@ -183,10 +174,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button Update_button;
         private System.Windows.Forms.TextBox message_textBox;
-        private System.Windows.Forms.TextBox total_textBox;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RadioButton add_RadioButton;
         private System.Windows.Forms.RadioButton gaps_RadioButton;
+        private System.Windows.Forms.Label label3;
     }
 }
 
