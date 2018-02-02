@@ -14,7 +14,6 @@ namespace WSR_Updater
     public partial class Updater_form : Form
     {
         private string source = "", destination = "";
-        private int linesOfSQL;
         private int startline, entries, updated, added;
 
         public Updater_form()
@@ -64,24 +63,31 @@ namespace WSR_Updater
             {
                 try
                 {
-                    if (add_RadioButton.Checked)
+                    startline = int.Parse(line_textBox.Text);
+                    entries = int.Parse(entries_textBox.Text);
+                    if (startline > GetTotalLines())
                     {
-                        startline = int.Parse(line_textBox.Text);
-                        entries = int.Parse(entries_textBox.Text);
-                        GetTotalLines();
-                        AddLines(startline, entries);
+                        message_textBox.Text += "Error: Cannot update line that does not exist.\r\n";
                     }
                     else
-                    {
-                        GetTotalLines();
-                        UpdateAllLines();
+                    { 
+                        if (add_RadioButton.Checked)
+                        {
+                            GetTotalLines();
+                            AddLines(startline, entries);
+                        }
+                        else
+                        {
+                            GetTotalLines();
+                            UpdateAllLines();
 
+                        }
+
+                        message_textBox.Text = "WSR successfully updated!\r\n\r\n" + String.Format("{0} lines updated.", updated);
+                        line_textBox.Text = ""; entries_textBox.Text = "";
+                        browse_source_textBox.Text = ""; browse_destination_textBox.Text = "";
+                        source = ""; destination = "";
                     }
-
-                    message_textBox.Text = "WSR successfully updated!\r\n\r\n" + String.Format("{0} lines updated.", updated);
-                    line_textBox.Text = ""; entries_textBox.Text = "";
-                    browse_source_textBox.Text = ""; browse_destination_textBox.Text = "";
-                    source = ""; destination = "";
                 }
                 catch (Exception)
                 {
@@ -95,7 +101,8 @@ namespace WSR_Updater
             string text = File.ReadAllText(source);
             StreamReader sr = new StreamReader(source);
             string oldline = sr.ReadLine(), blanklines = "", newline = "";
-            int i = 0, updated=0;
+            int i = 0;
+            updated =0;
 
             while (oldline != "[PreProcessSQL]" && !sr.EndOfStream)
             {
@@ -178,11 +185,11 @@ namespace WSR_Updater
 
         }
 
-        private void GetTotalLines()
+        private int GetTotalLines()
         {
             StreamReader sr = new StreamReader(source);
             string line = sr.ReadLine();
-            linesOfSQL = 0;
+            int linesOfSQL = 0;
 
             while (line != "[PreProcessSQL]" && !sr.EndOfStream)
                 line = sr.ReadLine();
@@ -201,6 +208,7 @@ namespace WSR_Updater
                 line = sr.ReadLine();
             }
             //message_textBox.Text = "There are " + linesOfSQL + " lines of SQL\r\n";
+            return linesOfSQL;
 
         }
 
