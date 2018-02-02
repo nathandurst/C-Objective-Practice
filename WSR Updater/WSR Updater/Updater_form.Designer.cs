@@ -40,7 +40,7 @@
             this.line_textBox = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.entries_textBox = new System.Windows.Forms.TextBox();
-            this.gaps_RadioButton = new System.Windows.Forms.RadioButton();
+            this.update_RadioButton = new System.Windows.Forms.RadioButton();
             this.add_RadioButton = new System.Windows.Forms.RadioButton();
             this.Update_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -148,16 +148,16 @@
             this.entries_textBox.Size = new System.Drawing.Size(61, 20);
             this.entries_textBox.TabIndex = 25;
             // 
-            // gaps_RadioButton
+            // update_RadioButton
             // 
-            this.gaps_RadioButton.AutoSize = true;
-            this.gaps_RadioButton.Location = new System.Drawing.Point(290, 106);
-            this.gaps_RadioButton.Name = "gaps_RadioButton";
-            this.gaps_RadioButton.Size = new System.Drawing.Size(102, 17);
-            this.gaps_RadioButton.TabIndex = 30;
-            this.gaps_RadioButton.Text = "Update All Lines";
-            this.gaps_RadioButton.UseVisualStyleBackColor = true;
-            this.gaps_RadioButton.CheckedChanged += new System.EventHandler(this.gaps_RadioButton_CheckedChanged);
+            this.update_RadioButton.AutoSize = true;
+            this.update_RadioButton.Location = new System.Drawing.Point(290, 106);
+            this.update_RadioButton.Name = "update_RadioButton";
+            this.update_RadioButton.Size = new System.Drawing.Size(102, 17);
+            this.update_RadioButton.TabIndex = 30;
+            this.update_RadioButton.Text = "Update All Lines";
+            this.update_RadioButton.UseVisualStyleBackColor = true;
+            this.update_RadioButton.CheckedChanged += new System.EventHandler(this.update_RadioButton_CheckedChanged);
             // 
             // add_RadioButton
             // 
@@ -188,7 +188,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(409, 343);
             this.Controls.Add(this.Update_button);
-            this.Controls.Add(this.gaps_RadioButton);
+            this.Controls.Add(this.update_RadioButton);
             this.Controls.Add(this.add_RadioButton);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.entries_textBox);
@@ -222,7 +222,7 @@
         private System.Windows.Forms.TextBox line_textBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox entries_textBox;
-        private System.Windows.Forms.RadioButton gaps_RadioButton;
+        private System.Windows.Forms.RadioButton update_RadioButton;
         private System.Windows.Forms.RadioButton add_RadioButton;
         private System.Windows.Forms.Button Update_button;
     }

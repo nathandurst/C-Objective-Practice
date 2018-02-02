@@ -46,13 +46,13 @@ namespace WSR_Updater
             }
                 
         }
-
+        
         private void Update_button_Click(object sender, EventArgs e)
         {
             if (((line_textBox.Text == "" || entries_textBox.Text == "" || browse_source_textBox.Text == "" 
                 || browse_destination_textBox.Text == "" ) && add_RadioButton.Checked) 
                 || ((browse_source_textBox.Text == "" || browse_destination_textBox.Text == "") 
-                && gaps_RadioButton.Checked))
+                && update_RadioButton.Checked))
             {
                 message_textBox.Text += "Error: All fields are required.\r\n";
             }
@@ -68,8 +68,8 @@ namespace WSR_Updater
                     {
                         startline = int.Parse(line_textBox.Text);
                         entries = int.Parse(entries_textBox.Text);
-
                         GetTotalLines();
+                        AddLines(startline, entries);
                     }
                     else
                     {
@@ -78,7 +78,7 @@ namespace WSR_Updater
 
                     }
 
-                    message_textBox.Text = "Success! WSR successfully updated here:\r\n\r\n" + destination;
+                    message_textBox.Text = "WSR successfully updated!\r\n\r\n" + String.Format("{0} lines updated.", updated);
                     line_textBox.Text = ""; entries_textBox.Text = "";
                     browse_source_textBox.Text = ""; browse_destination_textBox.Text = "";
                     source = ""; destination = "";
@@ -90,12 +90,62 @@ namespace WSR_Updater
             }
         }
 
+        private void AddLines(int start, int range)
+        {
+            string text = File.ReadAllText(source);
+            StreamReader sr = new StreamReader(source);
+            string oldline = sr.ReadLine(), blanklines = "", newline = "";
+            int i = 0, updated=0;
+
+            while (oldline != "[PreProcessSQL]" && !sr.EndOfStream)
+            {
+                oldline = sr.ReadLine();
+            }
+
+            for(int j = start; j < start+range; j++)
+            {
+                blanklines += String.Format("{0}=\r\n", j);
+            }
+
+            while (!sr.EndOfStream)
+            {
+                if ((oldline.IndexOf("=INSERT INTO", 0, StringComparison.CurrentCultureIgnoreCase) > -1
+                    || oldline.IndexOf("=CREATE", 0, StringComparison.CurrentCultureIgnoreCase) > -1
+                    || oldline.IndexOf("=ALTER ", 0, StringComparison.CurrentCultureIgnoreCase) > -1
+                    || oldline.IndexOf("=UPDATE ", 0, StringComparison.CurrentCultureIgnoreCase) > -1
+                    || oldline.IndexOf("=DELETE ", 0, StringComparison.CurrentCultureIgnoreCase) > -1
+                    || oldline.IndexOf("=SELECT ", 0, StringComparison.CurrentCultureIgnoreCase) > -1)
+                    && oldline.IndexOf(";--", 0, StringComparison.CurrentCultureIgnoreCase) <= -1)
+                {
+                    i++;
+                    string[] splitline = oldline.Split('=');
+                    string oldnum = String.Format(splitline[0] + "=");
+                    if(oldnum == String.Format(start + "="))
+                    {
+                        newline = oldline.Replace(oldnum, String.Format(blanklines + (start+range) + "="));
+                        i = i + range;
+                        updated++;
+                    }
+                    else
+                    {
+                        newline = oldline.Replace(oldnum, String.Format(i + "="));
+                        if (updated > 0)
+                            updated++;                        
+                    }
+                    text = text.Replace(oldline, newline);
+                }
+                oldline = sr.ReadLine();
+            }
+            File.WriteAllText(destination + "\\" + $@"{DateTime.Now.Ticks}.wsr", text);
+        }
+
         public void UpdateAllLines()
         {
             string text = File.ReadAllText(source);
             StreamReader sr = new StreamReader(source);
             string oldline = sr.ReadLine(), newline = "";
             int i = 0;
+            updated = 0;
 
             while (oldline != "[PreProcessSQL]" && !sr.EndOfStream)
                 oldline = sr.ReadLine();
@@ -114,6 +164,8 @@ namespace WSR_Updater
                     i++;
                     string[] splitline = oldline.Split('=');
                     string oldnum = String.Format(splitline[0] + "=");
+                    if (oldnum != String.Format(i + "="))
+                        updated++;
                     newline = oldline.Replace(oldnum, String.Format(i + "="));
                     text = text.Replace(oldline, newline);
                 }
@@ -122,7 +174,7 @@ namespace WSR_Updater
             }
 
             //MessageBox.Show(text);
-            File.WriteAllText(destination + "\\" + $@"{Guid.NewGuid()}.wsr", text);
+            File.WriteAllText(destination + "\\" + $@"{DateTime.Now.Ticks}.wsr", text);
 
         }
 
@@ -152,7 +204,7 @@ namespace WSR_Updater
 
         }
 
-        private void gaps_RadioButton_CheckedChanged(object sender, EventArgs e)
+        private void update_RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             line_textBox.Enabled = false;
             entries_textBox.Enabled = false;
