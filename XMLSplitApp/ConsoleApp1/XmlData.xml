@@ -11,14 +11,6 @@
           <PORTFOLIO name="ZHIGHLANDER EURO CDO" portfolioid="46753" />
           <PORTFOLIO name="ZHIGHLANDER EURO CDO II" portfolioid="46946" />
           <PORTFOLIO name="ZHIGHLANDER EURO CDO II LOCAL" portfolioid="47619" />
-          <PORTFOLIO name="ZHIGHLANDER EURO CDO II SWAP LIABILITIES" portfolioid="49248" />
-          <PORTFOLIO name="ZHIGHLANDER EURO CDO III" portfolioid="47220" />
-          <PORTFOLIO name="ZHIGHLANDER EURO CDO III LOCAL" portfolioid="47620" />
-          <PORTFOLIO name="ZHIGHLANDER EURO CDO III SWAP LIABILITIES" portfolioid="49273" />
-          <PORTFOLIO name="ZREF2002A - LEGG MASON" portfolioid="180" />
-          <PORTFOLIO name="ZRESTORATION IBJ" portfolioid="93" />
-          <PORTFOLIO name="ZSTRAND FUNDING II" portfolioid="49026" />
-          <PORTFOLIO name="ZTIERRA ALTA ABS CDO I" portfolioid="47274" />
           <PORTFOLIO name="ZTIERRA ALTA ABS CDO II" portfolioid="47275" />
         </PORTFOLIOS>
       </EXCHANGERATE>
@@ -26,21 +18,6 @@
         <PORTFOLIOS>
           <PORTFOLIO name="ABERDEEN LOAN FUNDING" portfolioid="47425" />
           <PORTFOLIO name="ABERDEEN LOAN FUNDING NOTES" portfolioid="47535" />
-          <PORTFOLIO name="ACIS CLO 2013-1 LTD." portfolioid="51449" />
-          <PORTFOLIO name="ACIS CLO 2013-2 LTD." portfolioid="51998" />
-          <PORTFOLIO name="ACIS CLO 2014-3, LTD." portfolioid="52647" />
-          <PORTFOLIO name="ACIS CLO 2014-4, Ltd." portfolioid="53106" />
-          <PORTFOLIO name="ACIS CLO 2014-5, LTD." portfolioid="53521" />
-          <PORTFOLIO name="ACIS CLO 2015-6 LTD." portfolioid="54045" />
-          <PORTFOLIO name="ACIS CLO 2017-7 LTD." portfolioid="56378" />
-          <PORTFOLIO name="ACIS CLO MANAGEMENT, LLC" portfolioid="56382" />
-          <PORTFOLIO name="ACIS FUNDING, L.P. - TRS MACQUARIE" portfolioid="52844" />
-          <PORTFOLIO name="CRUSADER - REPO BARCLAYS" portfolioid="48447" />
-          <PORTFOLIO name="ZREF2002A - LEGG MASON" portfolioid="180" />
-          <PORTFOLIO name="ZRESTORATION IBJ" portfolioid="93" />
-          <PORTFOLIO name="ZSTRAND FUNDING II" portfolioid="49026" />
-          <PORTFOLIO name="ZTIERRA ALTA ABS CDO I" portfolioid="47274" />
-          <PORTFOLIO name="ZTIERRA ALTA ABS CDO II" portfolioid="47275" />
         </PORTFOLIOS>
       </EXCHANGERATE>
     </EXCHANGERATES>
