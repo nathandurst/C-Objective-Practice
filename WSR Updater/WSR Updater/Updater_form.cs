@@ -63,31 +63,30 @@ namespace WSR_Updater
             {
                 try
                 {
-                    startline = int.Parse(line_textBox.Text);
-                    entries = int.Parse(entries_textBox.Text);
-                    if (startline > GetTotalLines())
+                    
+                    if (add_RadioButton.Checked)
                     {
-                        message_textBox.Text += "Error: Cannot update line that does not exist.\r\n";
+                        startline = int.Parse(line_textBox.Text);
+                        entries = int.Parse(entries_textBox.Text);
+                        if (startline > GetTotalLines())
+                        {
+                            message_textBox.Text += "Error: Cannot update line that does not exist.\r\n";
+                        }
+                        GetTotalLines();
+                        AddLines(startline, entries);
                     }
                     else
-                    { 
-                        if (add_RadioButton.Checked)
-                        {
-                            GetTotalLines();
-                            AddLines(startline, entries);
-                        }
-                        else
-                        {
-                            GetTotalLines();
-                            UpdateAllLines();
+                    {
+                        GetTotalLines();
+                        UpdateAllLines();
 
-                        }
-
-                        message_textBox.Text = "WSR successfully updated!\r\n\r\n" + String.Format("{0} lines updated.", updated);
-                        line_textBox.Text = ""; entries_textBox.Text = "";
-                        browse_source_textBox.Text = ""; browse_destination_textBox.Text = "";
-                        source = ""; destination = "";
                     }
+
+                    message_textBox.Text = "WSR successfully updated!\r\n\r\n" 
+                        + String.Format("{0} lines updated.\r\n{1} lines added.", updated, entries);
+                    line_textBox.Text = ""; entries_textBox.Text = "";
+                    browse_source_textBox.Text = ""; browse_destination_textBox.Text = "";
+                    source = ""; destination = "";
                 }
                 catch (Exception)
                 {
@@ -179,8 +178,6 @@ namespace WSR_Updater
 
                 oldline = sr.ReadLine();
             }
-
-            //MessageBox.Show(text);
             File.WriteAllText(destination + "\\" + $@"{DateTime.Now.Ticks}.wsr", text);
 
         }
@@ -207,7 +204,6 @@ namespace WSR_Updater
 
                 line = sr.ReadLine();
             }
-            //message_textBox.Text = "There are " + linesOfSQL + " lines of SQL\r\n";
             return linesOfSQL;
 
         }
