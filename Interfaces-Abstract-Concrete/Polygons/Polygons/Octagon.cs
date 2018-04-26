@@ -6,15 +6,26 @@ using System.Threading.Tasks;
 
 namespace Polygons
 {
-    public class Octagon : ConcreteRegularPlygon
+    //we need to implement all declarations from interface
+    //inherits from Object and implements IRegularPolygon
+    public class Octagon : Object, IRegularPolygon
     {
-        public Octagon(int length):
-            base(4, length)
-        { }
-
-        public override double GetArea()
+        public int NumberOfSides { get; set; }
+        public int SideLength { get; set; }
+        public Octagon(int length)  
         {
-            return 2 *(1 + Math.Sqrt(2)) * SideLength * SideLength;
+            NumberOfSides = 8;
+            SideLength = length;
+        }
+
+        public double GetPerimeter()
+        {
+            return NumberOfSides * SideLength;
+        }
+
+        public double GetArea()
+        {
+            return SideLength * SideLength * (2 + 2 * Math.Sqrt(2));
         }
     }
 }

@@ -12,8 +12,11 @@ namespace Polygons
         {
             var square = new Square(5);
             var triangle = new Triangle(5);
+            var octagon = new Octagon(5);
             DisplayPolygon("Square", square);
             DisplayPolygon("Triangle", triangle);
+            DisplayPolygon("Octagon", octagon);
+
 
             Console.ReadLine();
 
