@@ -1,0 +1,329 @@
+[Report]
+Key=4086 Security Master File
+Title=Security Master File
+Category=4086 Custom Reports
+Origin=2
+WizardSupported=False
+ReportSQL=SELECT PORTFOLIO, CUSIP, ISSUER, SEC_DETAIL, FLOAT_INDEX_RATE_ADD, FLOAT_RATE_MIN, FORMAT(MATURITYDate, 'MM/DD/YYYY') as MATURITY, DEFINED_MOODY_RATING, SP_RATING_DEFINED, BL_M_PRIV_RATING, BL_M_PUB_RATING, BL_SP_PRIV_RATING, BL_SP_PUB_RATING, BL_MOODY, BL_SP, MOODY_INDUSTRY, SP_INDUSTRY, COV_LITE, MARKETPRICE, FORMAT([MarkPriceDate], 'MM/DD/YYYY') as [Mark Price Date], COUNTRY, CURRENT_YTM, ISSUER_ID, ANALYST, LOANX_ID, SP_RECOVERY,  CS_INDUSTRY, BANK_LOAN_Y_N, COMPANY, MARKET_OFFER_PRICE,  FORMAT([CALL_PROTECTION_DATEDate], 'MM/DD/YYYY') as CALL_PROTECTION_DATE, PRICE_GRID, TOTAL_ISSUE, SP_OUTLOOK_DEFINED,  MOODY_OUTLOOK_DEFINED, DEFAULT_CODE, SENIOR_SECURED_LOANS, UNSECURED, PARI_PASSU, SENIOR_SECOND_LIENS, CURRENT_PAY, FLOATRATE, PARTICIPATING, DIP_COLLATERAL, LESS_Q_FREQUENCY, DELAYED_DRAW, MARKET, FORMAT([DEFAULT_DATEDate], 'MM/DD/YYYY') as DEFAULT_DATE, PAY_AGENT, PIK_INDICATOR, REVOLVING, SYNTHETIC, BBID, [Bloomberg ID], FORMAT([ISSUE_DATEDate], 'MM/DD/YYYY') as ISSUE_DATE,  SERVICE_MOODY_PRIVATE, SERVICE_SP_PRIVATE, DRAW_STATUS, FUNDED, MOODY_AT_PURCHASE, SP_AT_PURCHASE, CCMSECTYPE, CCMSECSUBTYPE, FORMAT([ASOFDATEDate], 'MM/DD/YYYY') as ASOFDATE, [Controlling Sponsor], [CS Subsector], [Credit Risk Score], [Industry Score], [Agency Site], [Public vs Private Access], [SGL Debt No], [SGL Rating], [SYMB_POOL], [FLOAT_PMT_SCHD], FORMAT([NEXT_FLOAT_DATEDate], 'MM/DD/YYYY') as NEXT_FLOAT_DATE, FLOAT_INDEX, SINK_FUND, INT_DIV_FREQ, FORMAT(PAY_DAYDate, 'MM/DD/YYYY') as PAY_DAY, ACCRUAL, TAX_STATUS, PRN_CURR, INC_CURR, SIC_PRIM, TLOCATION, FLOCATION, CLASS_144, GUARANTOR, Spread_Override, Floor_Override, FORMAT(Maturity_Override, 'MM/DD/YYYY') as Maturity_Override, Moodys_Facility_Override, [S&P_Issuer_Override], Moodys_CFR_Override, [S&P_Facility_Override], DS_CA_RECEIVED, FORMAT(CALL_PROTECTION_DATE_2, 'MM/DD/YYYY') as CALL_PROTECTION_DATE_2, MOODYS_ISSUER_ID, MOODYS_FACILITY_ID, SP_ISSUER_ID, SP_FACILITY_ID, [PIK Floor], [Prime Floor], [Libor Floor], [SP_CAP_IQ_GICS] FROM FinalTable ORDER BY SortID, PORTFOLIO, CUSIP
+;--ReportSQL=SELECT * FROM SIC
+
+Orientation=2
+ColumnSpacing=25
+ReportHeaderFontName=Arial
+ReportHeaderFontSize=16
+ReportHeaderFontBold=1
+ReportPageHeaderFontItalic=0
+ReportPageHeaderFontName=Arial
+ReportPageHeaderFontSize=7
+ReportPageHeaderFontBold=0
+GroupFontName=Arial
+GroupFontSize=8
+GroupFontBold=1
+GroupFontItalic=0
+GroupFooterFontName=Arial
+GroupFooterFontSize=7
+GroupFooterFontBold=1
+GroupFooterFontItalic=0
+DetailFontName=Arial
+DetailFontSize=7
+DetailFontBold=0
+DetailFontItalic=0
+ContainsAccessSQL=False
+;MultiCurrencyEnabled=True
+;HasPropertySheet=True
+;AutoAppendTitleDate=True
+CompanyID=0318
+
+;------------------
+;------ DEOs ------
+;------------------
+
+[DEO_Position]
+ClassName=FCSDEOPosition.Position
+FieldList=Position_ID, MarkPrice_MarkPrice, MarkPrice_MarkDate, MarkPrice_AskPrice, CurrentYTM, Outstanding
+AssetFieldList=Portfolio_AbbrevName, Asset_CUSIPAssetID_Name, Asset_IssuerID4086, Asset_Name, Asset_Rate1, Asset_MaturityDate, Asset_Moodys PrivateRating_Name, Asset_Moodys Corporate Family FeedRating_Name, Asset_S&P PrivateRating_Name, Asset_S&P Foreign Issuer Long TermRating_Name, Asset_Moodys SS FeedRating_Name, Asset_S&P Local Issuer Long TermRating_Name, Issuer_S&PSIC_Name, Issuer_S&P SICSIC_Name, Asset_CovLite4086, Issuer_Analyst, Asset_LoanXIDAssetID_Name, Asset_S&P Asset Recovery RatingRating_Name, Issuer_CSSIC_Name, Facility_CallDate1, Facility_CallDate2, Asset_PriceGrid4086, Facility_OrigAmountGlob, Asset_S&P OutlookRating_Name, Asset_Moody OutlookRating_Name, Asset_IsDefaulted, Seniority_Name, Position_PariPassuCovenant, Position_NonPerforming, Position_Name, Facility_DIP, Facility_DelayedDraw, Position_NonPerformingDate, BankDeal_AgentBank_Name, Facility_IsPIK, Facility_FacilityType, Asset_Synthetic4086, Asset_ID, BankDeal_CreditDate, Asset_Moodys PurchaseRating_Name, Asset_S&P PurchaseRating_Name, Asset_SECSUBTYPE4086, Asset_SECTYPE4086, BankDeal_PrimarySponsor_ID, Asset_IssueDate, CurrencyType_Identifier, @AsofDate, Asset_CSSubsector4086, Issuer_Industry S&PSIC_Name, BankDeal_AgencySite4086, Asset_Private4086, Asset_SGLDebtNo4086, Asset_Moodys Speculative Grade Liquidity RatingRating_Name, Asset_Ticker4086, Asset_FloatIndexFreq4086, Issuer_Country_Name, Asset_Bloomberg IDAssetID_Name, Asset_BloombergID4086, Asset_Credit Risk ScoreRating_Name, Asset_FLOATINDEXRATEADD4086, Asset_FLOATRATEMIN4086, Asset_MATURITY4086, Asset_BLMPUBRATING4086, Asset_BLSPPUBRATING4086, Asset_BLMOODY4086, Asset_BLSP4086, BankDeal_ReceivedCA, Issuer_IDMIID, Asset_MAIDAssetID_Name, Issuer_IDSPEID, Asset_SPMIDAssetID_Name, Issuer_S&P Cap IQ/GICSSIC_Name, Issuer_Name
+OutputTable=Positions
+CRI_AsOfDateDate=PRP_AsOfDateDate
+CRI_Portfolios=PRP_PortfolioPicker
+CRI_AssetTypes=Loan
+CRI_LoanParType=PRP_LoanParType
+CRI_CostMethod=PRP_CostMethod
+CRI_CurrentYieldType=PRP_CurrentYieldType
+CRI_MarkBy=PRP_MarkMethod
+CRI_DateType=PRP_DateType
+
+[DEO_TradedSettled]
+ClassName=FCSDEOPosition.TradedSettled
+FieldList=Position_ID, CommitmentSettled, OutstandingSettled
+AssetFieldType=All
+OutputTable=TradedSettled
+CRI_AsOfDateDate=PRP_AsOfDateDate
+CRI_Portfolios=PRP_PortfolioPicker
+CRI_AssetTypes=Loan
+CRI_LoanParType=PRP_LoanParType
+CRI_CostMethod=PRP_CostMethod
+CRI_CurrentYieldType=PRP_CurrentYieldType
+CRI_MarkBy=PRP_MarkMethod
+
+[DEO_ContractAsOfDateDate]
+ClassName=FCSDEOContract.Contract
+FieldList=Contract_ID, Contract_ContractType, MonthCountName, YearCountName, Contract_FacilityOption_Behavior, Contract_NextPaymentDate, Contract_MaturityDate, Contract_Frequency, Contract_AllInRate, Contract_Amount
+AssetFieldList=Position_ID
+;AssetFieldType=All
+OutputTable=Contract
+CRI_AsOfDateDate=PRP_AsOfDateDate
+CRI_Portfolios=PRP_PortfolioPicker
+CRI_View=Active
+;CRI_AssetJoinType=Inner
+
+[DEO_RateLimit]
+ClassName=FCSDEOAsset.RateLimit
+FieldList=RateLimit_Limit, RateLimit_LimitType, Position_ID, FacilityOption_Frequency, RateLimit_AddDate
+OutputTable=RateLimit
+CRI_AssociationTypesList=All
+CRI_Portfolios=PRP_PortfolioPicker
+
+[DEO_Trade]
+ClassName=FCSDEOTrade.Trade
+FieldList=Position_ID, Trade_AgreementType_Name, Trade_AddDate
+OutputTable=Trade
+CRI_TradeType=All
+CRI_Portfolios=PRP_PortfolioPicker
+CRI_Status=All
+CRI_AssetTypes=Loans
+CRI_StartDate=1/1/1900
+CRI_EndDate=PRP_AsOfDateDate
+CRI_DateType=PRP_DateType
+
+[DEO_SIC]
+FieldList=SIC_Name, SIC_Source_ID, SIC_SICType_Name
+ClassName=FCSDEOReference.SIC
+OutputTable=SIC
+CRI_AsOfDateDate=PRP_AsOfDateDate
+CRI_Portfolios=PRP_PortfolioPicker
+CRI_SICType=Moody Corp
+CRI_SourceObjectType=117
+
+[DEO_TableRateLimit]
+CLASSNAME=FCSDEOTables.Tables
+FieldList=@Tables
+;--Get caps and floors from tblRateLimit 
+CRI_Tables=<SCRIPT> Replace("(SELECT C.m_lAsset, C.m_dLimit, D.m_sLookUp AS sLimitType, E.m_sLookUp AS sRateType, F.m_sFacilityOption FROM (SELECT B.* FROM tblRateLimit B INNER JOIN (SELECT DISTINCT(m_lAsset) FROM tblPosition WHERE m_lPortfolio IN (<PRP_PortfolioPicker>)) A ON A.m_lAsset = B.m_lAsset) C LEFT JOIN tblLookUp D ON C.m_lLimitType = D.m_lCode AND D.m_lLookUpCategory = 26 LEFT JOIN tblLookUp E ON C.m_lRateType = E.m_lCode AND E.m_lLookUpCategory = 25 LEFT JOIN tblFacilityOption F ON C.m_lRateOption = F.m_lObjectID WHERE C.m_lRateOptionType = 32 AND (D.m_sLookUp = 'Cap' OR D.m_sLookUp = 'Floor')) AS tblRateLimitData", "(","(")</SCRIPT>
+OutputTable=
+
+
+;-----------------
+;------ SQL ------
+;-----------------
+
+[PreProcessSQL]
+;--Create Final Table with all data requested.
+1=CREATE TABLE FinalTable (PORTFOLIO VARCHAR(255), Asset_ID INT, CUSIP VARCHAR(255), ISSUER VARCHAR(255), SEC_DETAIL VARCHAR(255), FLOAT_INDEX_RATE_ADD FLOAT, FLOAT_RATE_MIN FLOAT, MATURITYDate DATE, DEFINED_MOODY_RATING VARCHAR(2), SP_RATING_DEFINED VARCHAR(2), BL_M_PRIV_RATING VARCHAR(255), BL_M_PUB_RATING VARCHAR(255), BL_SP_PRIV_RATING VARCHAR(255), BL_SP_PUB_RATING VARCHAR(255), BL_MOODY VARCHAR(255), BL_SP VARCHAR(255), MOODY_INDUSTRY VARCHAR(255), SP_INDUSTRY VARCHAR(255), COV_LITE VARCHAR(255), MARKETPRICE FLOAT, MarkPriceDate DATE, COUNTRY VARCHAR(255), CURRENT_YTM VARCHAR(255), ISSUER_ID VARCHAR(255), ANALYST VARCHAR(255), LOANX_ID VARCHAR(255), SP_RECOVERY VARCHAR(255), CS_INDUSTRY VARCHAR(255), BANK_LOAN_Y_N VARCHAR(255), COMPANY VARCHAR(255), MARKET_OFFER_PRICE FLOAT, CALL_PROTECTION_DATEDate DATE, CALL_PROTECTION_DATE_2 DATE, PRICE_GRID VARCHAR(2), TOTAL_ISSUE FLOAT, SP_OUTLOOK_DEFINED VARCHAR(255),  MOODY_OUTLOOK_DEFINED VARCHAR(255), DEFAULT_CODE VARCHAR(2), SENIOR_SECURED_LOANS VARCHAR(2), UNSECURED VARCHAR(2), PARI_PASSU VARCHAR(2), SENIOR_SECOND_LIENS VARCHAR(2), CURRENT_PAY VARCHAR(2), FLOATRATE FLOAT, PARTICIPATING VARCHAR(255), DIP_COLLATERAL VARCHAR(2), LESS_Q_FREQUENCY SMALLINT, DELAYED_DRAW VARCHAR(2), MARKET VARCHAR(2), DEFAULT_DATEDate DATE, PAY_AGENT VARCHAR(255), PIK_INDICATOR VARCHAR(2), REVOLVING VARCHAR(2), SYNTHETIC VARCHAR(255), BBID VARCHAR(255), [Bloomberg ID] VARCHAR(255), ISSUE_DATEDate DATE,  SERVICE_MOODY_PRIVATE VARCHAR(2), SERVICE_SP_PRIVATE VARCHAR(2), DRAW_STATUS VARCHAR(2), FUNDED VARCHAR(2), MOODY_AT_PURCHASE VARCHAR(255), SP_AT_PURCHASE VARCHAR(255), CCMSECTYPE VARCHAR(255),CCMSECSUBTYPE VARCHAR(255), ASOFDATEDate DATE, [Controlling Sponsor] INT, [CS Subsector] VARCHAR(255), [Credit Risk Score] VARCHAR(2), [Industry Score] VARCHAR(255), [Agency Site] VARCHAR(255), [Public vs Private Access] VARCHAR(2), [SGL Debt No] VARCHAR(255), [SGL Rating] VARCHAR(255), [SYMB_POOL] VARCHAR(255), [FLOAT_PMT_SCHD] VARCHAR(20), [NEXT_FLOAT_DATEDate] DATE, FLOAT_INDEX VARCHAR(255), [SINK_FUND] VARCHAR(2), [INT_DIV_FREQ] VARCHAR(20), PAY_DAYDate DATE, ACCRUAL VARCHAR(20), TAX_STATUS VARCHAR(10), PRN_CURR VARCHAR(20), INC_CURR VARCHAR(20), SIC_PRIM VARCHAR(255), TLOCATION VARCHAR(5), FLOCATION VARCHAR(5), CLASS_144 VARCHAR(2), GUARANTOR VARCHAR(255), Spread_Override FLOAT, Floor_Override FLOAT, Maturity_Override DATE, Moodys_Facility_Override VARCHAR(255), [S&P_Issuer_Override] VARCHAR(255), Moodys_CFR_Override VARCHAR(255), [S&P_Facility_Override] VARCHAR(255), DS_CA_RECEIVED INT, SortID INT, PositionID INT, MonthIndex INT, IssueDate DATE, Seniority_Name VARCHAR(255), [Prime Floor] FLOAT, [PIK Floor] FLOAT, [Libor Floor] FLOAT, MOODYS_ISSUER_ID VARCHAR(254), MOODYS_FACILITY_ID VARCHAR(254), SP_ISSUER_ID VARCHAR(254), SP_FACILITY_ID VARCHAR(254), [SP_CAP_IQ_GICS] VARCHAR(254));
+
+;--Creating custom reference table for a calculation 
+2=Create TABLE MonthAbrev (MonthIndex INT PRIMARY KEY, Abrev VARCHAR(12));
+3=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (0,'Error');
+4=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (1201, 'JFMAMJJASOND');
+5=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (1202, 'FMAMJJASONDJ');
+6=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (1203, 'MAMJJASONDJF');
+7=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (1204, 'AMJJASONDJFM');
+8=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (1205, 'MJJASONDJFMA');
+9=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (1206, 'JJASONDJFMAM');
+10=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (1207, 'JASONDJFMAMJ');
+11=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (1208, 'ASONDJFMAMJJ');
+12=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (1209, 'SONDJFMAMJJA');
+13=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (1210, 'ONDJFMAMJJAS');
+14=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (1211, 'NDJFMAMJJASO');
+15=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (1212, 'DJFMAMJJASON');
+16=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (401, 'JAJO');
+17=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (402, 'FMAN');
+18=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (403, 'MJSD');
+19=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (404, 'AJOJ');
+20=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (405, 'MANF');
+21=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (406, 'JSDM');
+22=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (407, 'JOJA');
+23=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (408, 'ANFM');
+24=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (409, 'SDMJ');
+25=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (410, 'OJAJ');
+26=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (411, 'NFMA');
+27=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (412, 'DMJS');
+28=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (201, 'JJ');
+29=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (202, 'FA');
+30=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (203, 'MS');
+31=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (204, 'AO');
+32=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (205, 'MN');
+33=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (206, 'JD');
+34=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (207, 'JJ');
+35=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (208, 'AF');
+36=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (209, 'SM');
+37=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (210, 'OA');
+38=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (211, 'NM');
+39=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (212, 'DJ');
+40=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (101, 'J');
+41=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (102, 'F');
+42=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (103, 'M');
+43=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (104, 'A');
+44=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (105, 'M');
+45=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (106, 'J');
+46=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (107, 'J');
+47=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (108, 'A');
+48=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (109, 'S');
+49=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (110, 'O');
+50=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (111, 'N');
+51=INSERT INTO MonthAbrev (MonthIndex, Abrev) VALUES (112, 'D');
+
+52=SELECT * INTO tblLiborFloorSorted FROM tblRateLimitData WHERE sLimitType = 'Floor' AND m_sFacilityOption = 'LIBOR' AND sRateType = 'Base Rate' ORDER BY m_lAsset,m_sFacilityOption
+
+53=SELECT * INTO tblPIKFloorSorted FROM tblRateLimitData WHERE sLimitType = 'Floor' AND m_sFacilityOption = 'PIK' AND sRateType = 'Base Rate' ORDER BY m_lAsset,m_sFacilityOption
+
+54=SELECT * INTO tblPrimeFloorSorted FROM tblRateLimitData WHERE sLimitType = 'Floor' AND m_sFacilityOption = 'PRIME' AND sRateType = 'Base Rate' ORDER BY m_lAsset,m_sFacilityOption
+
+55=SELECT P.Asset_ID, PR.m_dLimit AS primefloor, PK.m_dLimit AS pikfloor, LB.m_dLimit AS liborfloor INTO tblFloor FROM ((Positions P LEFT JOIN tblLiborFloorSorted LB ON LB.m_lAsset = P.Asset_ID) LEFT JOIN tblPrimeFloorSorted PR ON PR.m_lAsset = P.Asset_ID) LEFT JOIN tblPIKFloorSorted PK ON PK.m_lAsset = P.Asset_ID
+
+;--Since the report is Position level insert the positions into the final table
+56=INSERT INTO FinalTable (PORTFOLIO, Asset_ID, CUSIP, ISSUER, SEC_DETAIL, FLOAT_INDEX_RATE_ADD, MATURITYDate, BL_M_PRIV_RATING, BL_M_PUB_RATING, BL_SP_PRIV_RATING, BL_SP_PUB_RATING, BL_MOODY, BL_SP, MOODY_INDUSTRY, SP_INDUSTRY, COV_LITE, COUNTRY, ISSUER_ID, ANALYST, LOANX_ID, SP_RECOVERY, CS_INDUSTRY, BANK_LOAN_Y_N, TOTAL_ISSUE, SP_OUTLOOK_DEFINED, MOODY_OUTLOOK_DEFINED, FLOATRATE, PARTICIPATING, DEFAULT_DATEDate, PAY_AGENT, BBID, [Bloomberg ID], ISSUE_DATEDate, MOODY_AT_PURCHASE, SP_AT_PURCHASE, CCMSECTYPE, CCMSECSUBTYPE, ASOFDATEDate, [Controlling Sponsor], [CS Subsector], [Credit Risk Score], [Industry Score], [Agency Site], [SGL Debt No], [SGL Rating], [SYMB_POOL], SINK_FUND, TAX_STATUS, PRN_CURR, INC_CURR, SIC_PRIM, CLASS_144, GUARANTOR, MARKETPRICE, MarkPriceDate, CURRENT_YTM, MARKET_OFFER_PRICE, FLOAT_INDEX,  IssueDate, Seniority_Name, PositionID, Spread_Override, Floor_Override, Maturity_Override, Moodys_Facility_Override, [S&P_Issuer_Override], Moodys_CFR_Override, [S&P_Facility_Override], DS_CA_RECEIVED, SortID, [PIK Floor], [Prime Floor], [Libor Floor], MOODYS_ISSUER_ID, MOODYS_FACILITY_ID, SP_ISSUER_ID, SP_FACILITY_ID, SP_CAP_IQ_GICS) SELECT Portfolio_AbbrevName, Asset_ID, Asset_CUSIPAssetID_Name, Issuer_Name, Asset_Name, Asset_Rate1, Asset_MaturityDate, [Asset_Moodys PrivateRating_Name], [Asset_Moodys Corporate Family FeedRating_Name], [Asset_S&P PrivateRating_Name], [Asset_S&P Foreign Issuer Long TermRating_Name],[Asset_Moodys SS FeedRating_Name], [Asset_S&P Local Issuer Long TermRating_Name], '', [Issuer_S&PSIC_Name], [Asset_CovLite4086], Issuer_Country_Name, Asset_IssuerID4086, Issuer_Analyst, Asset_LoanXIDAssetID_Name, [Asset_S&P Asset Recovery RatingRating_Name], Issuer_CSSIC_Name, 'Y', Facility_OrigAmountGlob, [Asset_S&P OutlookRating_Name], [Asset_Moody OutlookRating_Name], NULL, Position_Name, Position_NonPerformingDate, BankDeal_AgentBank_Name, [Asset_Bloomberg IDAssetID_Name], Asset_BloombergID4086, BankDeal_CreditDate, [Asset_Moodys PurchaseRating_Name], [Asset_S&P PurchaseRating_Name], Asset_SECTYPE4086, Asset_SECSUBTYPE4086, @AsofDate, BankDeal_PrimarySponsor_ID, Asset_CSSubsector4086, [Asset_Credit Risk ScoreRating_Name], [Issuer_Industry S&PSIC_Name], BankDeal_AgencySite4086, Asset_SGLDebtNo4086, [Asset_Moodys Speculative Grade Liquidity RatingRating_Name], Asset_Ticker4086, 'Y', 'FED & ST', CurrencyType_Identifier, CurrencyType_Identifier, [Issuer_S&P SICSIC_Name], 'N', Asset_Ticker4086, MarkPrice_MarkPrice, MarkPrice_MarkDate, CurrentYTM, MarkPrice_AskPrice, Asset_FloatIndexFreq4086, Asset_IssueDate, Seniority_Name, Position_ID, Asset_FLOATINDEXRATEADD4086, Asset_FLOATRATEMIN4086, Asset_MATURITY4086, Asset_BLMPUBRATING4086, Asset_BLSPPUBRATING4086, Asset_BLMOODY4086, Asset_BLSP4086, BankDeal_ReceivedCA, 2, NULL, NULL, NULL, Issuer_IDMIID, Asset_MAIDAssetID_Name, Issuer_IDSPEID, Asset_SPMIDAssetID_Name, [Issuer_S&P Cap IQ/GICSSIC_Name] FROM Positions
+
+57=UPDATE FinalTable F INNER JOIN tblFloor FL ON F.Asset_ID = FL.Asset_ID SET [PIK Floor] = pikfloor, [Prime Floor] = primefloor, [Libor Floor] = liborfloor;
+
+;--- Getting the Min Floor per position. 
+58=SELECT MIN(RateLimit_Limit) as MinLimit, Position_ID INTO MinLimit FROM RateLimit WHERE RateLimit_LimitType = 2 GROUP BY Position_ID
+59=UPDATE FinalTable F INNER JOIN MinLimit L ON L.Position_ID = F.PositionID SET FLOAT_RATE_MIN = MinLimit
+
+;--Get the first Frequency rate
+60=SELECT MIN(RateLimit_AddDate) AS AddDate, Position_ID INTO FLimit1 FROM RateLimit GROUP BY Position_ID
+61=SELECT R.Position_ID, R.FacilityOption_Frequency AS Frequency INTO FLimit2 FROM RateLimit R INNER JOIN FLimit1 F ON R.Position_ID = F.Position_ID AND R.RateLimit_AddDate = F.AddDate
+;--60=SELECT FIRST(FacilityOption_Frequency) as Frequency, Position_ID INTO FLimit FROM RateLimit GROUP BY Position_ID
+62=UPDATE FinalTable F INNER JOIN FLimit2 L ON L.Position_ID = F.PositionID SET LESS_Q_FREQUENCY = Frequency
+
+;--Trade Rollup for Agreement Type
+63=SELECT Position_ID, MIN(Trade_AddDate) AS AddDate INTO TradeRollup1 FROM Trade GROUP BY Position_ID
+64=SELECT T.Position_ID, T.Trade_AgreementType_Name as AgreementType INTO TradeRollup2 FROM Trade T INNER JOIN TradeRollup1 TR ON T.Position_ID = TR.Position_ID AND T.Trade_AddDate = TR.AddDate
+;--62=SELECT Position_ID, First(Trade_AgreementType_Name) as AgreementType INTO TradeRollup FROM Trade GROUP BY Position_ID
+65=UPDATE FinalTable F INNER JOIN TradeRollup2 R ON R.Position_ID = F.PositionID SET MARKET = 'I' WHERE AgreementType = 'Primary'
+66=UPDATE FinalTable F INNER JOIN TradeRollup2 R ON R.Position_ID = F.PositionID SET MARKET = 'S' WHERE AgreementType <> 'Primary'
+
+;--Join on the traded Settle table
+67=UPDATE FinalTable F INNER JOIN TradedSettled S ON S.Position_ID = F.PositionID SET FUNDED = 'Y' WHERE S.OutstandingSettled = S.CommitmentSettled
+68=UPDATE FinalTable F INNER JOIN TradedSettled S ON S.Position_ID = F.PositionID SET FUNDED = 'N' WHERE S.OutstandingSettled <> S.CommitmentSettled
+
+;-- Rollup on contracts in order to fill the float schedule 
+;--Grouping and rolling up contracts by maturity date
+69=SELECT Position_ID, MIN(Contract_MaturityDate) as MinMaturity INTO MaturityRollup FROM Contract WHERE Contract_MaturityDate > <PRP_AsOfDateDate:Text> GROUP BY Position_ID
+
+;--Joining back to the contract table removing the non-min dates.
+70=SELECT C.* INTO ContractMaturity FROM Contract C INNER JOIN MaturityRollup M ON M.Position_ID = C.Position_ID AND M.MinMaturity = C.Contract_MaturityDate
+
+;--Grouping and rolling up remaining contract ID to position Level.
+71=SELECT Position_ID, MAX(Contract_ID) as ContractID INTO ContractIDRollup FROM ContractMaturity GROUP BY Position_ID
+
+;--Performing final contract rollup to position level
+72=SELECT C.*, 0 as MonthIndex INTO RolledUpContracts FROM ContractIDRollup R INNER JOIN ContractMaturity C ON R.Position_ID = C.Position_ID AND R.ContractID = C.Contract_ID
+
+;--Updating Index and joining back to the main table
+;--71=UPDATE RolledUpContracts SET MonthIndex = (Contract_Frequency * 100) + MONTH(Contract_MaturityDate)
+;--72=UPDATE FinalTable F INNER JOIN RolledUpContracts C ON C.Position_ID = F.PositionID SET F.MonthIndex = C.MonthIndex
+;--73=UPDATE FinalTable F INNER JOIN MonthAbrev M ON M.MonthIndex = F.MonthIndex SET FLOAT_PMT_SCHD = Abrev
+
+;--Rollup up Contracts again for other fields because this one is LIBOR only
+73=SELECT MIN(Contract_NextPaymentDate) as NextPayday, MAX(MonthCountName) as MaxMonthCount, MAX(YearCountName) as MaxYearCount, Position_ID INTO LiborPositionContracts FROM Contract WHERE Contract_FacilityOption_Behavior = 1 GROUP BY Position_ID
+
+;--Finish updating Contract level info
+74=UPDATE FinalTable F INNER JOIN LiborPositionContracts C ON C.Position_ID = F.PositionID SET PAY_DAYDate = NextPayday, ACCRUAL = (MaxMonthCount + '/' + MaxYearCount)
+
+;--Update all calculated Y/N Fields from Positions Table
+;--Set all to False
+75=UPDATE FinalTable F SET PRICE_GRID = 'N', DIP_COLLATERAL = 'N', DELAYED_DRAW = 'N', PIK_INDICATOR = 'N', REVOLVING = 'N', [Public vs Private Access] = 'N', DEFAULT_CODE = 'N', PARI_PASSU = 'N', SENIOR_SECURED_LOANS = 'N', SENIOR_SECOND_LIENS = 'N', UNSECURED = 'N', SYNTHETIC = 'N', DRAW_STATUS = 'N'
+;--PriceGRID
+76=UPDATE FinalTable F INNER JOIN Positions P ON P.Position_ID = F.PositionID SET PRICE_GRID = 'Y' WHERE Asset_PriceGrid4086 <> 0
+;--DIP_COLLATERAL
+77=UPDATE FinalTable F INNER JOIN Positions P ON P.Position_ID = F.PositionID SET DIP_COLLATERAL = 'Y' WHERE Facility_DIP <> 0
+;--DELAYED_DRAW
+78=UPDATE FinalTable F INNER JOIN Positions P ON P.Position_ID = F.PositionID SET DELAYED_DRAW = 'Y' WHERE Facility_DelayedDraw <> 0
+;--PIK_INDICATOR
+79=UPDATE FinalTable F INNER JOIN Positions P ON P.Position_ID = F.PositionID SET PIK_INDICATOR = 'Y' WHERE Facility_IsPIK <> 0
+;--REVOLVING
+80=UPDATE FinalTable F INNER JOIN Positions P ON P.Position_ID = F.PositionID SET REVOLVING = 'Y' WHERE Facility_FacilityType = 2
+;--[Public vs Private Access]
+81=UPDATE FinalTable F INNER JOIN Positions P ON P.Position_ID = F.PositionID SET [Public vs Private Access] = 'Y' WHERE Asset_Private4086 <> 0
+;--DEFAULT_CODE
+82=UPDATE FinalTable F INNER JOIN Positions P ON P.Position_ID = F.PositionID SET DEFAULT_CODE = 'Y' WHERE Asset_IsDefaulted <> 0
+;--PARI_PASSU
+83=UPDATE FinalTable F INNER JOIN Positions P ON P.Position_ID = F.PositionID SET PARI_PASSU = 'Y' WHERE Position_PariPassuCovenant <> 0
+;--SYNTHETIC
+84=UPDATE FinalTable F INNER JOIN Positions P ON P.Position_ID = F.PositionID SET SYNTHETIC = 'Y' WHERE Asset_Synthetic4086 <> 0
+
+;-- Security_Name Updates 
+85=UPDATE FinalTable F SET SENIOR_SECURED_LOANS = 'Y' WHERE InStr(Seniority_Name,'Senior Secured') > 0
+86=UPDATE FinalTable F SET UNSECURED = 'Y' WHERE InStr(Seniority_Name,'Unsecured') > 0
+87=UPDATE FinalTable F SET SENIOR_SECOND_LIENS = 'Y' WHERE InStr(Seniority_Name,'Second Lien') > 0
+
+;-- Current_Pay
+88=UPDATE FinalTable F INNER JOIN Positions P ON F.PositionID = P.Position_ID SET CURRENT_PAY = 'N' WHERE Position_NonPerforming <> 0
+89=UPDATE FinalTable F INNER JOIN Positions P ON F.PositionID = P.Position_ID SET CURRENT_PAY = 'Y' WHERE Position_NonPerforming = 0
+
+;--CALL_PROTECTION_DATEDate
+90=UPDATE FinalTable F INNER JOIN Positions P ON F.PositionID = P.Position_ID  SET CALL_PROTECTION_DATEDate = Facility_CallDate1
+91=UPDATE FinalTable F INNER JOIN Positions P ON F.PositionID = P.Position_ID SET CALL_PROTECTION_DATE_2 = Facility_CallDate2
+
+;--Make Sure FLOAT_INDEX is not NULL
+92=UPDATE FinalTable SET FLOAT_INDEX = 'US0003M' WHERE FLOAT_INDEX IS NULL OR FLOAT_INDEX = ''
+
+;--Update each of the Float Frequencies 
+93=UPDATE FinalTable F SET NEXT_FLOAT_DATEDate = DATEADD('m', 1, ISSUE_DATEDate), INT_DIV_FREQ = 'MONTHLY' WHERE INSTR(FLOAT_INDEX, '1M') > 0
+94=UPDATE FinalTable F SET NEXT_FLOAT_DATEDate = DATEADD('m', 3, ISSUE_DATEDate), INT_DIV_FREQ = 'QUARTERLY' WHERE INSTR(FLOAT_INDEX, '3M') > 0
+95=UPDATE FinalTable F SET NEXT_FLOAT_DATEDate = DATEADD('m', 6, ISSUE_DATEDate), INT_DIV_FREQ = 'SEMIANNUALLY' WHERE INSTR(FLOAT_INDEX, '6M') > 0
+96=UPDATE FinalTable F SET NEXT_FLOAT_DATEDate = DATEADD('m', 12, ISSUE_DATEDate), INT_DIV_FREQ = 'ANNUALLY' WHERE INSTR(FLOAT_INDEX, '12M') > 0
+
+;--DRAW_STATUS
+97=UPDATE FinalTable F INNER JOIN Positions P ON P.Position_ID = F.PositionID SET DRAW_STATUS = 'Y' WHERE Outstanding > 1
+
+;--Updating Index and joining back to the main table
+98=UPDATE FINALTable F SET MonthIndex = iif(INSTR(FLOAT_INDEX, '1M') OR INSTR(FLOAT_INDEX, 'month'), 1200, iif(INSTR(FLOAT_INDEX, '6M') OR INSTR(FLOAT_INDEX, 'semi'), 200, iif(INSTR(FLOAT_INDEX, '3M') OR INSTR(FLOAT_INDEX, 'quarter'), 400, 100))) + MONTH(PAY_DAYDate)
+99=UPDATE FinalTable F INNER JOIN MonthAbrev M ON M.MonthIndex = F.MonthIndex SET FLOAT_PMT_SCHD = Abrev
+
+;--Updating FLOATRATE column from COntract DEO using AllInRate form Funded Contract with earliest maturity date
+100=SELECT Position_ID, SUM(Contract_Amount * Contract_AllInRate)/iif(SUM(Contract_Amount) = 0, NULL, SUM(Contract_Amount)) AS WAAllInRate INTO FundedRollup FROM Contract WHERE Contract_ContractType IN (38,55) GROUP BY Position_ID
+101=UPDATE FinalTable F LEFT JOIN FundedRollup R ON F.PositionID = R.Position_ID SET F.FLOATRATE = R.WAAllInRate * 100
+
+;--Update Moody SIC because Position deo was pulling in incorrect value (using sic ref deo)
+102=UPDATE FinalTable F LEFT JOIN SIC S ON F.PositionID = S.SIC_Source_ID SET MOODY_INDUSTRY = S.SIC_Name WHERE S.SIC_SICType_Name = 'Moody Corp'
+
+;--Header Record
+103=INSERT INTO FinalTable (PORTFOLIO, CUSIP, SortID) SELECT COUNT(PORTFOLIO), DATE(), 1 FROM FinalTable
+
+;------------------------
+;------ Parameters ------
+;------------------------
+
+[PRP_PortfolioPicker]
+Type=PortfolioPicker
+Label=Portfolios:
+
+[PRP_AsOfDateDate]
+Type=DateRangeSingle
+Label=As Of Date:
+
+[PRP_DateType]
+Label=Date Type
+Type=ListBox
+ListContents=Trade Date,Settle Date
+
+[PRP_CostMethod]
+Type=Listbox
+Label=Cost Method:
+ListContents=FIFO,LIFO,Highest Cost,Lowest Cost,Weighted Avg
+
+[PRP_CurrentYieldTypePicker]
+Label=Current Yield Type
+Type=ListBox
+ListContents=Cost, MarkBy
+
+[PRP_MarkMethod]
+Type=ListBox
+ListContents=Most Recent Mark,Exact Date,Most Recent Mark/Cost
+Label=Mark Method (Equities if @ MV):
+
+[PRP_LoanParType]
+Label=Loan Par Based on:
+Type=ListBox
+ListContents=Outstanding, Commitment

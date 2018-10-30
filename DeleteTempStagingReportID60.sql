@@ -1,0 +1,1 @@
+DELETE FROM DStblReport WHERE ReportID = 60 AND CompanyID = 1

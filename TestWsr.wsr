@@ -1,0 +1,194 @@
+[Report]
+Key=4086 Failed Trades
+Title=Failed Trades Report
+Category=4086 Custom Reports
+Origin=2
+WizardSupported=False
+ReportSQL=SELECT Trade_Commissions + Trade_Fees + Trade_EconomicBenefit + Trade_Accruals + Trade_AccruedInterest + Trade_AccruedPIK + Trade_AccruedFee + Trade_Amount as [Total Cash Amount], CounterBank_BrokerShortName4086 as CounterParty, Portfolio_AbbrevName as Portfolio_ID, Issuer_Name, Asset_Name as [Facility Name], Trade_Outstanding as [Funded Par], Trade_Price as Price, DATEVALUE(Trade_TradeDate) as [Trade Date], DATEVALUE(Trade_SettleDate) as [Settle Date], TradeTypeDescription,  Trade_OriginalCommitment as [Original Comm Par], '' as [Trustee Confirmation/Fail Comments], Asset_AssetID_LoanXID as LXID, Asset_AssetID_CUSIP as [Facility CUSIP] FROM Trades WHERE Trade_Settled = -1 ORDER BY  Portfolio_AbbrevName, TradeTypeDescription, Issuer_Name, Asset_Name, Trade_TradeDate, Trade_SettleDate 
+;--ReportSQL=SELECT Portfolio_Name, Issuer_Name, Asset_Name, Trade_Commissions, Fees, Trade_EconomicBenefit, Trade_Accruals, Trade_AccruedInterest, Trade_AccruedPIK, Trade_AccruedFee, Trade_Amount, Trade_Commissions + Fees + Trade_EconomicBenefit + Trade_Accruals + Trade_AccruedInterest + Trade_AccruedPIK + Trade_AccruedFee + Trade_Amount as [Total Cash Amount], TradeTypeDescription FROM Trades ORDER BY Portfolio_Name, Issuer_Name, Asset_Name
+;--ReportSQL=SELECT EconomicBenefit FROM tblEconomicBenefit
+GroupFields=Portfolio_ID, TradeTypeDescription
+Orientation=2
+ColumnSpacing=25
+ReportHeaderFontName=Arial
+ReportHeaderFontSize=16
+ReportHeaderFontBold=1
+ReportPageHeaderFontItalic=0
+ReportPageHeaderFontName=Arial
+ReportPageHeaderFontSize=7
+ReportPageHeaderFontBold=0
+GroupFontName=Arial
+GroupFontSize=7
+GroupFontBold=1
+GroupFontItalic=0
+GroupFooterFontName=Arial
+GroupFooterFontSize=6
+GroupFooterFontBold=1
+GroupFooterFontItalic=0
+DetailFontName=Arial
+DetailFontSize=6
+DetailFontBold=0
+DetailFontItalic=0
+AutoAppendTitleDate=True
+CompanyID=318
+;MultiCurrencyEnabled=True
+
+[DEO_Trade]
+ClassName=FCSDEOTrade.Trade
+FieldList=Trade_ParAmount, Trade_Outstanding, Trade_Price, Trade_TradeDate, Trade_SettleDate, Trade_Settled, Trade_AccruedInterest, Trade_AccruedPIK, Trade_AccruedFee, Trade_Commissions, TradeTypeDescription, CounterBank_Name, BrokerBank_Name, Trade_Amount, Trade_Accruals, Trade_OriginalCommitment, Trade_ID, CounterBank_BrokerShortName4086
+AssetFieldList=Portfolio_AbbrevName, Issuer_Name, Asset_Name, Asset_AssetID_CUSIP, Asset_AssetID_LoanXID, Portfolio_Name
+AssetFieldType=All
+OutputTable=Trades 
+CRI_StartDate=PRP_StartEndDate
+CRI_EndDate=PRP_StartEndDate
+CRI_Portfolios=PRP_PortfolioPicker
+CRI_TradeType=PRP_TradeType
+CRI_AssetTypes=PRP_AssetPicker
+CRI_DateType=PRP_DateType
+
+[DEO_TranIncome]
+ClassName=FCSDEOTransaction.TranIncome
+FieldList=TranIncome_Amount, TranIncome_Source_ID, TranIncome_Source_Type
+AssetFieldType=All
+OutputTable=TranIncome
+CRI_StartDate=PRP_StartEndDate
+CRI_EndDate=PRP_StartEndDate
+CRI_Portfolios=PRP_PortfolioPicker
+CRI_DateType=PRP_TradeType
+CRI_AssetTypes=PRP_AssetPicker
+
+[DEO_tblEconomicBenefit]
+ClassName=FCSDEOTables.Tables
+FieldList=@Tables
+OutputTable=
+CRI_Tables=(SELECT SUM(C.m_cAmount) AS EconomicBenefit, A.m_lSource AS Trade_ID FROM tblTranCash C  INNER JOIN tblTranAsset A ON A.m_lObjectId = C.m_lSource AND C.m_lSourceType = 172 WHERE C.m_lActionCode = 900113 AND A.m_lSourceType = 118 GROUP BY A.m_lSource) AS tblEconomicBenefit
+
+[PreProcessSQL]
+1=ALTER TABLE Trades ADD COLUMN Trade_EconomicBenefit money, Trade_Fees money
+2=Update Trades T LEFT JOIN tblEconomicBenefit E ON T.Trade_ID = E.Trade_ID SET T.Trade_EconomicBenefit = iif(E.EconomicBenefit IS NULL, 0, IIF(E.EconomicBenefit = 0, 0, E.EconomicBenefit))
+3=SELECT SUM(TranIncome_Amount) AS Fees, TranIncome_Source_ID AS Trade_ID INTO tblFees FROM TranIncome WHERE TranIncome_Source_Type = 118 GROUP BY TranIncome_Source_ID
+4=UPDATe Trades T LEFT JOIN tblFees F ON T.Trade_ID = F.Trade_ID SET T.Trade_Fees = IIF(F.Fees IS NULL, 0, -1*F.Fees)
+5=update Trades SET Trade_Price = Trade_Outstanding
+6=SELECT * INTO test FROM Trades
+7=CREATE TABLE Final3 (Portfolio INT, Asset VARCHAR(254));
+8=INSERT INTO Final3 SELECT Portfolio_ID, Asset_Name FROM Trades
+
+[FLD_Total Cash Amount]
+Title=Total Cash Amount
+Name=Total Cash Amount
+Type=Numeric
+OutputFormat=#,##0.00;(#,##0.00);0.00;0.00
+Width=1200
+
+[FLD_Counterparty]					
+Title=CounterParty	
+Name=CounterParty
+Type=TextShort
+Width=1200
+
+[FLD_Issuer_Name]					
+Title=Issuer_Name
+Name=Issuer_Name
+Type=TextMedium
+Width=1300
+Truncate=false
+
+[FLD_Facility Name]
+Title=Facility Name
+Name=Facility Name
+Type=TextShort
+Width=1300
+Truncate=false
+
+[FLD_Funded Par]
+Title=Funded Par
+Name=Funded Par
+Type=Numeric
+OutputFormat=#,##0.00;(#,##0.00)
+Width=1000
+
+[FLD_Price]					
+Title=Price
+Name=Price
+Type=Price
+Width=650
+
+[FLD_Trade Date]
+Title=Trade Date
+Name=Trade Date
+Type=Date
+Width=700
+
+[FLD_Settle Date]					
+Title=Settle Date
+Name=Settle Date
+Type=Date
+Width=700
+
+[FLD_Original Comm Par]
+Title=Original Comm Par
+Name=Original Comm Par
+Type=AmountMedium
+Width=1200
+IncludeSummaryField=True			
+AggregateFunction=Sum
+
+[FLD_TradeTypeDescription]					
+Title=TradeTypeDescription
+Name=TradeTypeDescription
+Type=TextMedium
+Width=500
+
+[FLD_Trustee Confirmation/Fail Comments]					
+Title=Trustee Confirmation/Fail Comments
+Name=Trustee Confirmation/Fail Comments
+Type=TextMedium
+Width=1500
+
+[FLD_SelectedAssetID]
+Type=AssetID
+Width=1000
+
+[FLD_LXID]					
+Title=LXID
+Name=LXID
+Type=TextMedium
+Width=1000
+Truncate=false
+
+[FLD_Facility CUSIP]					
+Title=Facility CUSIP
+Name=Facility CUSIP
+Type=TextMedium
+Width=1000
+Truncate=false
+
+[PRP_StartEndDate]
+Type=DateRangeDouble
+Label=Dates:
+
+[PRP_PortfolioPicker]				
+Type=PortfolioPicker
+Label=Portfolios:
+
+[PRP_AssetPicker]				
+Type=AssetPicker
+Label=Asset Types:
+FieldTypes=ABS,Bond,CDS,Equity,Loan,Universal,Swap
+
+[PRP_DateType]
+Type=ListBox
+ListContents=Settle Date
+Label=Date Type:
+
+[PRP_TradeType]
+Type=Listbox
+ListContents=All,Buys,Sells,Shorts,Cover Shorts,Buys & Shorts,Sells & Cover Shorts
+Label=Trade Type
+
+[PRP_AssetIDPicker]
+Type=AssetIDPicker
+Label=AssetID
+Level=Asset
+MaxNumber=1
+DEO=DEO_Trade
