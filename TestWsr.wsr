@@ -65,7 +65,7 @@ CRI_Tables=(SELECT SUM(C.m_cAmount) AS EconomicBenefit, A.m_lSource AS Trade_ID 
 
 [PreProcessSQL]
 1=ALTER TABLE Trades ADD COLUMN Trade_EconomicBenefit money, Trade_Fees money
-2=Update Trades T LEFT JOIN tblEconomicBenefit E ON T.Trade_ID = E.Trade_ID SET T.Trade_EconomicBenefit = iif(E.EconomicBenefit IS NULL, 0, IIF(E.EconomicBenefit = 0, 0, E.EconomicBenefit))
+2=Update Trades T LEFT JOIN tblEconomicBenefit E ON T.Trade_ID = E.Trade_ID SET T.Trade_EconomicBenefit = iif(E.EconomicBenefit IS NULL, 0, IIF(E.EconomicBenefit = 0, 0, E.EconomicBenefit)), T.Trade_Price = IIF(Trade_Price = 0, 10, 0)
 3=SELECT SUM(TranIncome_Amount) AS Fees, TranIncome_Source_ID AS Trade_ID INTO tblFees FROM TranIncome WHERE TranIncome_Source_Type = 118 GROUP BY TranIncome_Source_ID
 4=UPDATe Trades T LEFT JOIN tblFees F ON T.Trade_ID = F.Trade_ID SET T.Trade_Fees = IIF(F.Fees IS NULL, 0, -1*F.Fees)
 5=update Trades SET Trade_Price = Trade_Outstanding

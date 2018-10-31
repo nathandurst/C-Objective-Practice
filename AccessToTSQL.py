@@ -1,7 +1,8 @@
 import re
 import datetime
-from tkinter.filedialog import askopenfilename
+import os
 import tkinter.filedialog as filedialog
+import tkinter.messagebox as messagebox
 
 
 def poundforupdate(new_line):
@@ -66,14 +67,17 @@ def convertiif(old_line):
     return new_line
 
 
-
+def ShowFile():
+    MsgBox = messagebox.askokcancel("Show converted report", "Would you like to open the converted report in your default file viewer?")
+    return MsgBox
 
 
 FILEOPENOPTIONS = [('WSO files', '*.wsr'), ('All files', '*')]
-file_name = filedialog.askopenfilename(filetypes=FILEOPENOPTIONS)
-r = open(file_name, "r")
+read_file_name = filedialog.askopenfilename(filetypes=FILEOPENOPTIONS)
+r = open(read_file_name, "r")
 time_append = datetime.datetime.now()
-w = open(file_name[0:len(file_name) - 4] + time_append.strftime('%d%m%Y_%H%M%S') + ".wsr", "w+")
+write_file_name = read_file_name[0:len(read_file_name) - 4] + time_append.strftime('%d%m%Y_%H%M%S') + ".wsr"
+w = open(write_file_name, "w+")
 
 
 r.seek(0)
@@ -109,7 +113,9 @@ for line in r:
     else:
         w.write(line)
 
-            
 r.close();
 w.close();
+
+if ShowFile():
+    os.startfile(write_file_name)
 # pause = input("press any key to exit")
